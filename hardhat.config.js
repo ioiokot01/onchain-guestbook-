@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -6,10 +7,11 @@ module.exports = {
   networks: {
     // Local in-memory chain (default for `npx hardhat test`)
     hardhat: {},
-    // Base Sepolia testnet — filled in later when we deploy.
-    // baseSepolia: {
-    //   url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
-    //   accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-    // },
+    // Base Sepolia testnet (chainId 84532). Configure secrets in .env.
+    baseSepolia: {
+      url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
+      chainId: 84532,
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
   },
 };
