@@ -43,8 +43,9 @@ every signature.
 ## Roadmap
 
 - [x] Guestbook contract + tests
-- [ ] Deploy script + Base Sepolia deployment
-- [ ] Web frontend (wallet connect, sign, live feed)
+- [x] Deploy script + Base Sepolia network config
+- [x] Web frontend (wallet connect, sign, live feed)
+- [ ] Deploy to Base Sepolia + wire address into frontend
 - [ ] Polish: ENS names, pagination, themes
 
 ## Security notes

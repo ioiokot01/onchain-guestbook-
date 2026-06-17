@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onchain Guestbook</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1>📖 Onchain Guestbook</h1>
+        <p class="subtitle">Sign the guestbook on Base. Forever on-chain.</p>
+        <button id="connectBtn" class="btn">Connect Wallet</button>
+        <p id="account" class="account hidden"></p>
+      </header>
+
+      <section class="compose">
+        <textarea
+          id="messageInput"
+          maxlength="280"
+          placeholder="Leave a message (max 280 chars)…"
+          disabled
+        ></textarea>
+        <div class="compose-row">
+          <span id="charCount" class="char-count">0 / 280</span>
+          <button id="signBtn" class="btn" disabled>Sign</button>
+        </div>
+      </section>
+
+      <p id="status" class="status"></p>
+
+      <section class="feed">
+        <div class="feed-head">
+          <h2>Entries <span id="total" class="badge">0</span></h2>
+          <button id="refreshBtn" class="btn btn-ghost" disabled>Refresh</button>
+        </div>
+        <ul id="messages" class="messages"></ul>
+        <p id="emptyState" class="empty">No entries yet — be the first to sign!</p>
+      </section>
+    </main>
+
+    <!-- ethers v6 UMD build -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
