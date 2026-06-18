@@ -45,8 +45,14 @@ every signature.
 - [x] Guestbook contract + tests
 - [x] Deploy script + Base Sepolia network config
 - [x] Web frontend (wallet connect, sign, live feed)
-- [ ] Deploy to Base Sepolia + wire address into frontend
+- [x] Deploy to Base Sepolia + wire address into frontend
 - [ ] Polish: ENS names, pagination, themes
+
+## Deployments
+
+| Network | Address |
+| --- | --- |
+| Base Sepolia | [`0x0352f75eEcc8316c194d38FB4F1526bf9f674c30`](https://sepolia.basescan.org/address/0x0352f75eEcc8316c194d38FB4F1526bf9f674c30) |
 
 ## Security notes
 

@@ -2,9 +2,9 @@
 // Config
 // ---------------------------------------------------------------------------
 
-// Paste the deployed Guestbook address here after running the deploy script.
-// Leave empty to be reminded to deploy first.
-const CONTRACT_ADDRESS = "";
+// Deployed Guestbook on Base Sepolia (chainId 84532).
+// https://sepolia.basescan.org/address/0x0352f75eEcc8316c194d38FB4F1526bf9f674c30
+const CONTRACT_ADDRESS = "0x0352f75eEcc8316c194d38FB4F1526bf9f674c30";
 
 // Minimal ABI — only the bits the frontend uses.
 const ABI = [
