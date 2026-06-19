@@ -67,4 +67,32 @@ describe("Guestbook", function () {
       "Guestbook: index out of range"
     );
   });
+
+  it("accepts a message of exactly MAX_MESSAGE_LENGTH", async function () {
+    const max = await guestbook.MAX_MESSAGE_LENGTH();
+    const exact = "x".repeat(Number(max));
+    await expect(guestbook.connect(alice).sign(exact)).to.emit(
+      guestbook,
+      "Signed"
+    );
+    expect((await guestbook.getEntry(0)).message).to.equal(exact);
+  });
+
+  it("lets the same wallet sign multiple times", async function () {
+    await guestbook.connect(alice).sign("one");
+    await guestbook.connect(alice).sign("two");
+    expect(await guestbook.total()).to.equal(2n);
+    const messages = await guestbook.getMessages();
+    expect(messages[0].signer).to.equal(alice.address);
+    expect(messages[1].signer).to.equal(alice.address);
+  });
+
+  it("getEntry and getMessages agree for the same index", async function () {
+    await guestbook.connect(bob).sign("consistency check");
+    const entry = await guestbook.getEntry(0);
+    const all = await guestbook.getMessages();
+    expect(entry.signer).to.equal(all[0].signer);
+    expect(entry.message).to.equal(all[0].message);
+    expect(entry.timestamp).to.equal(all[0].timestamp);
+  });
 });
