@@ -1,5 +1,10 @@
 # Onchain Guestbook
 
+[![CI](https://github.com/ioiokot01/onchain-guestbook-/actions/workflows/ci.yml/badge.svg)](https://github.com/ioiokot01/onchain-guestbook-/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636.svg)
+![Chain](https://img.shields.io/badge/Base-Sepolia-0052ff.svg)
+
 A tiny full-stack dApp for the [Base](https://base.org) ecosystem: anyone can
 sign an on-chain guestbook with a short message, and every entry is stored
 permanently on the blockchain.
