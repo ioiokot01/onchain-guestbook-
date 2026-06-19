@@ -30,6 +30,7 @@ const TARGET_CHAIN = {
 let provider; // ethers BrowserProvider
 let signer; // current signer
 let contract; // contract bound to signer
+let allEntries = []; // last loaded entries (chain order, oldest-first)
 
 const els = {
   connectBtn: document.getElementById("connectBtn"),
@@ -42,6 +43,7 @@ const els = {
   total: document.getElementById("total"),
   messages: document.getElementById("messages"),
   emptyState: document.getElementById("emptyState"),
+  searchInput: document.getElementById("searchInput"),
 };
 
 // ---------------------------------------------------------------------------
@@ -113,18 +115,35 @@ async function loadMessages() {
   if (!contract) return;
   setStatus("Loading entries…");
   try {
-    const entries = await contract.getMessages();
-    render(entries);
-    els.total.textContent = String(entries.length);
+    allEntries = await contract.getMessages();
+    els.total.textContent = String(allEntries.length);
+    if (allEntries.length > 0) els.searchInput.classList.remove("hidden");
+    render();
     setStatus("");
   } catch (err) {
     setStatus(err.shortMessage || err.message || "Failed to load.", "error");
   }
 }
 
-function render(entries) {
+function render() {
   els.messages.innerHTML = "";
+
+  const q = els.searchInput.value.trim().toLowerCase();
+  const entries = q
+    ? allEntries.filter(
+        (e) =>
+          e.message.toLowerCase().includes(q) ||
+          e.signer.toLowerCase().includes(q)
+      )
+    : allEntries;
+
+  if (allEntries.length === 0) {
+    els.emptyState.textContent = "No entries yet — be the first to sign!";
+    els.emptyState.classList.remove("hidden");
+    return;
+  }
   if (entries.length === 0) {
+    els.emptyState.textContent = "No entries match your search.";
     els.emptyState.classList.remove("hidden");
     return;
   }
@@ -198,6 +217,7 @@ els.connectBtn.addEventListener("click", connect);
 els.signBtn.addEventListener("click", sign);
 els.refreshBtn.addEventListener("click", loadMessages);
 els.messageInput.addEventListener("input", updateCharCount);
+els.searchInput.addEventListener("input", render);
 
 if (window.ethereum) {
   window.ethereum.on?.("accountsChanged", () => window.location.reload());
